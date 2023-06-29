@@ -6,5 +6,6 @@
  const baseDir = path.join(__dirname, 'templates')
  app.get('/', (req, res)=>res.sendFile(`${baseDir}/index.html`))
  app.get('/cadastrar', (req, res) => res.sendFile(`${baseDir}/cadastrar.html`))
+ app.get(`/consultar`, (req, res) => res.sendFile(`${baseDir}/consultar.html`))
  app.use((req, res)=> res.sendFile(`${baseDir}/404.html`))
  app.listen(porta, ()=>console.log(`Servidor rodando em: http://localhost:${porta}`))
