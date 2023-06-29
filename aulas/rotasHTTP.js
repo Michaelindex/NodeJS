@@ -6,6 +6,7 @@ http.createServer((req, res)=>{
         res.end("<h1>Tela de cadastro!!!</h1>")
     } else if (rota == '/consulta'){
         res.end("<h1>Tela de consulta !!!</h1>")
+        res.sendFile(__dirname + "")
     } else{
         res.end("<h1>Tela inicial !!!</h1>")
     }
